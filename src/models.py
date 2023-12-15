@@ -40,6 +40,8 @@ class Favorite_list(Base): #child
     __tablename__ = 'favorite_list'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"))
+    planet_id = Column(Integer, ForeignKey("planet.id"))
+    character_id = Column(Integer, ForeignKey("character.id"))
     user = relationship("User", back_populates="favorite_list")
 
 class Planet(Base):

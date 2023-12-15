@@ -32,17 +32,30 @@ Base = declarative_base()
 class User(Base): #parent
     __tablename__ = 'user'
     id = Column(Integer,primary_key=True)
-    Username = Column(String(10), nullable= False, unique=True)
-    password = Column(String (12), nullable= False)
+    Username = Column(String(12), nullable= False, unique=True)
+    password = Column(String (20), nullable= False)
     favorite_list = relationship("Favorite_list", back_populates="user")
 
-class Favorite_list(Base): #child
+class Favorite_list(Base): #child   
     __tablename__ = 'favorite_list'
     id = Column(Integer, primary_key=True)
-    name = Column(String(40), nullable=False)
     user_id = Column(Integer, ForeignKey("user.id"))
     user = relationship("User", back_populates="favorite_list")
 
+class Planet(Base):
+    __tablename__ = 'planet'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False)
+    favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"))
+    favorite_list = relationship("favorite_list", back_populates="planet")
+    
+
+class Character(Base):
+    __tablename__ = 'character'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False)
+    favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"))
+    favorite_list = relationship("favorite_list", back_populates="character")
 
 
 

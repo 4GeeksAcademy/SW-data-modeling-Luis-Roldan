@@ -46,6 +46,8 @@ class Planet(Base):
     __tablename__ = 'planet'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
+    dimension = Column(String(50), nullable=False)
+    population = Column(String(50), nullable=False)
     favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"))
     favorite_list = relationship("favorite_list", back_populates="planet")
     
@@ -54,6 +56,8 @@ class Character(Base):
     __tablename__ = 'character'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
+    eye_color = Column(String(50), nullable=False)
+    height = Column(String(50), nullable=False)
     favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"))
     favorite_list = relationship("favorite_list", back_populates="character")
 

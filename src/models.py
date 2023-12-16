@@ -32,19 +32,19 @@ Base = declarative_base()
 class User(Base): #parent
     __tablename__ = 'user'
     id = Column(Integer,primary_key=True)
-    Username = Column(String(12), nullable= False, unique=True)
+    username = Column(String(12), nullable= False, unique=True)
     password = Column(String (20), nullable= False)
     favorite_list = relationship("Favorite_list", back_populates="user")
 
 class Favorite_list(Base): #child   
     __tablename__ = 'favorite_list'
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey("user.id"))
+    user_id = Column(Integer, ForeignKey("user.id"), nullable= False)
     #planet_id = Column(Integer, ForeignKey("planet.id"))
     #character_id = Column(Integer, ForeignKey("character.id"))
     user = relationship("User", back_populates="favorite_list")
     planet = relationship("Planet", back_populates="favorite_list")
-    planet = relationship("Character", back_populates="favorite_list")
+    character = relationship("Character", back_populates="favorite_list")
 
 class Planet(Base):
     __tablename__ = 'planet'
@@ -52,7 +52,7 @@ class Planet(Base):
     name = Column(String(50), nullable=False)
     dimension = Column(String(50), nullable=False)
     population = Column(String(50), nullable=False)
-    favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"))
+    favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"), nullable= False)
     favorite_list = relationship("Favorite_list", back_populates="planet")
     
 
@@ -62,7 +62,7 @@ class Character(Base):
     name = Column(String(50), nullable=False)
     eye_color = Column(String(50), nullable=False)
     height = Column(String(50), nullable=False)
-    favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"))
+    favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"), nullable= False)
     favorite_list = relationship("Favorite_list", back_populates="character")
 
 

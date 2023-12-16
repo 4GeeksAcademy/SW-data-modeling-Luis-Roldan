@@ -40,9 +40,11 @@ class Favorite_list(Base): #child
     __tablename__ = 'favorite_list'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"))
-    planet_id = Column(Integer, ForeignKey("planet.id"))
-    character_id = Column(Integer, ForeignKey("character.id"))
+    #planet_id = Column(Integer, ForeignKey("planet.id"))
+    #character_id = Column(Integer, ForeignKey("character.id"))
     user = relationship("User", back_populates="favorite_list")
+    planet = relationship("Planet", back_populates="favorite_list")
+    planet = relationship("Character", back_populates="favorite_list")
 
 class Planet(Base):
     __tablename__ = 'planet'
@@ -51,7 +53,7 @@ class Planet(Base):
     dimension = Column(String(50), nullable=False)
     population = Column(String(50), nullable=False)
     favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"))
-    favorite_list = relationship("favorite_list", back_populates="planet")
+    favorite_list = relationship("Favorite_list", back_populates="planet")
     
 
 class Character(Base):
@@ -61,7 +63,7 @@ class Character(Base):
     eye_color = Column(String(50), nullable=False)
     height = Column(String(50), nullable=False)
     favorite_list_id = Column(Integer, ForeignKey("favorite_list.id"))
-    favorite_list = relationship("favorite_list", back_populates="character")
+    favorite_list = relationship("Favorite_list", back_populates="character")
 
 
 
